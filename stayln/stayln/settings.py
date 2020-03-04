@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 from django.contrib.messages import constants as messages
-from .config import EMAIL_USER, EMAIL_PASSWORD
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -158,10 +157,3 @@ MEDIA_URL = '/media/'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
-
-# Emails
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = EMAIL_USER
-EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
-EMAIL_USE_TLS = True
