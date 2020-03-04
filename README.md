@@ -15,7 +15,7 @@ cd stayln-service
 git switch dev (remove it in production)
 cd stayln 
 ```
-Please create a database called staylndb and modify the stayln/settings.py to change this part according to your postgreSQL settings 
+Please create a postgreSQL database called staylndb and modify the stayln/settings.py to change the following part according to your postgreSQL settings 
 ```
 DATABASES = {
     'default': {
