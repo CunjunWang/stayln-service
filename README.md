@@ -11,8 +11,9 @@ Course project for Columbia University COMS W6998 - Cloud Computing and Big Data
 ## Set Up and Run
 ```
 git clone git@github.com:CunjunWang/stayln-service.git
+cd stayln-service
 git switch dev (remove it in production)
-cd stayln-service/stayln 
+cd stayln 
 ```
 Please create a database called staylndb and modify the stayln/settings.py to change this part according to your postgreSQL settings 
 ```
