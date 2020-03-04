@@ -1,4 +1,5 @@
-#Stayln
+# Stayln
+
 Course project for Columbia University COMS W6998 - Cloud Computing and Big Data, 2020 Spring.
 
 ## Team Members
