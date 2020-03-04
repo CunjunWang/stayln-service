@@ -8,6 +8,29 @@ Course project for Columbia University COMS W6998 - Cloud Computing and Big Data
 - [Jierui Liu](https://github.com/Willincia1124) (UNI: jl5490)
 - [Jingkaihui Wei](https://github.com/jingkaw) (UNI: jw3826)
 
+## Set Up and Run
+```
+git clone git@github.com:CunjunWang/stayln-service.git
+cd stayln-service/stayln 
+```
+Please create a database called staylndb and modify the stayln/settings.py to change this part according to your postgreSQL settings 
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'staylndb',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost'
+    }
+}
+```
+Then, run
+```
+python manage.py migrate
+python manage.py runserver
+```
+Then, you can access development server at http://127.0.0.1:8000/
 ## Project Description
 
 ## Document
