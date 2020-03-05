@@ -14,6 +14,10 @@ img {
 .social a {
   margin-right: 0.4rem; }
 
+#register, #login{
+  background: url(../img/showcase.jpg) no-repeat top center fixed;
+}
+
 #showcase {
   background: url(../img/showcase.jpg) no-repeat top center fixed;
   position: relative;
