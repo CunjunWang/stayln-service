@@ -70,3 +70,4 @@ def logout(request):
         auth.logout(request)
         messages.success(request, 'Logged out successfully')
     return redirect('index')
+

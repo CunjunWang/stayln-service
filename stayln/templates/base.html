@@ -3,32 +3,35 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'css/all.css' %}">
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-  <!-- Custom -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <!-- Light Box -->
-  <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
-  <!-- Logo -->
-  <link rel="shortcut icon" href="{%static 'img/logo.png' %}" />
-  <title>Stayln {% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Custom -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Light Box -->
+    <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+    <!-- Logo -->
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}"/>
+    <title>Stayln {% block title %}{% endblock %}</title>
 </head>
 <body>
- <!-- Top Bar -->
- {% include 'partials/_topbar.html' %}
- <!-- Nav Bar -->
- {% include 'partials/_navbar.html' %}
-  {% block content %} {% endblock %}
-  <!-- Footer -->
+<!-- Top Bar -->
+{% include 'partials/_topbar.html' %}
+<!-- Nav Bar -->
+{% include 'partials/_navbar.html' %}
+{% block content %} {% endblock %}
+<!-- Footer -->
 {% include 'partials/_footer.html' %}
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'js/main.js' %}"></script>
-  <script src="{% static 'js/lightbox.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6kHpm24MjUXHqCxpNk7oIPBW40-Sp0Nc&callback=initMap" async
+        defer></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/lightbox.min.js' %}"></script>
+
 </body>
 </html>
