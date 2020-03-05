@@ -10,6 +10,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
+
           <li 
           {% if '/' == request.path%}
           class="nav-item active mr-3"
@@ -18,6 +19,14 @@
           {% endif %}
           >
             <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+        <li
+          {% if '/listings/search' in request.path %}
+          class="nav-item active mr-3"
+          {% else %}
+          class="nav-item mr-3"
+          {% endif %}>
+            <a class="nav-link" href="{% url 'search' %}">Search</a>
           </li>
           <li 
           {% if '/about' in request.path %}
@@ -28,22 +37,14 @@
           >
             <a class="nav-link" href="{% url 'about' %}">About</a>
           </li>
-          <li
-          {% if '/listings' in request.path and '/listings/search' not in request.path %}
-          class="nav-item active mr-3"
-          {% else %}
-          class="nav-item mr-3"
-          {% endif %}>
-            <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
-          </li>
-          <li
-          {% if '/listings/search' in request.path %}
-          class="nav-item active mr-3"
-          {% else %}
-          class="nav-item mr-3"
-          {% endif %}>
-            <a class="nav-link" href="{% url 'search' %}">Search</a>
-          </li>
+{#          <li#}
+{#          {% if '/listings' in request.path and '/listings/search' not in request.path %}#}
+{#          class="nav-item active mr-3"#}
+{#          {% else %}#}
+{#          class="nav-item mr-3"#}
+{#          {% endif %}>#}
+{#            <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>#}
+{#          </li>#}
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -55,7 +56,7 @@
           class="nav-item mr-3"
           {% endif %}>
             <a class="nav-link" href="{% url 'dashboard' %}">
-             {{user.username}}</a>
+             Dashboard</a>
           </li>
           <li class="nav-item mr-3">
             <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
