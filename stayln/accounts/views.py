@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from contacts.models import Contact
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
-from contacts.models import Contact
+from django.shortcuts import render, redirect
 
 
 def login(request):
@@ -71,3 +71,33 @@ def logout(request):
         messages.success(request, 'Logged out successfully')
     return redirect('index')
 
+
+def edit(request):
+    if request.user.is_authenticated:
+        return render(request, 'accounts/edit.html', {'user': request.user})
+    else:
+        messages.error(request, 'Please login')
+        return redirect('login')
+
+
+def update(request):
+    if request.user.is_authenticated and request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        previous_email = request.user.email
+        user = request.user
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        if previous_email != email and User.objects.filter(email=email).exists():
+            messages.error(request, 'Email is taken')
+            return render(request, 'accounts/edit.html', {'user': user})
+        else:
+            user.save()
+            messages.success(
+                request, 'Saved successfully')
+            return redirect('dashboard')
+    else:
+        messages.error(request, 'Please login')
+        return redirect('login')
