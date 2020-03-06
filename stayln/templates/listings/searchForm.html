@@ -24,7 +24,7 @@
     </div>
     <!-- Form Row 2 -->
     <div class="form-row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-4 mb-3">
             <label class="sr-only">Bedrooms</label>
             <select name="bedrooms" class="form-control">
                 <option selected="true" value="">Bedrooms (Any)</option>
@@ -33,7 +33,16 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-4 mb-3">
+            <label class="sr-only">Bathrooms</label>
+            <select name="bathrooms" class="form-control">
+                <option selected="true" value="">Min Bathrooms (All)</option>
+                {% for key,value in bedroom_choices.items %}
+                    <option value="{{ key }}" {% if key == values.bathrooms %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
             <select name="price" class="form-control">
                 <option selected="true" value="10000000000000000">Max Price (All)</option>
                 {% for key,value in price_choices.items %}
