@@ -38,11 +38,11 @@
                         {#                        <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="">#}
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-9">
-                                    <h6 class="text-secondary">{{ user.first_name }} {{ user.last_name }} </h6>
+                                <div class="col-md-8">
+                                    <h5 class="text-secondary">{{ user.first_name }} {{ user.last_name }} </h5>
                                 </div>
-                                <div class="col-md-3">
-                                    <a href="{% url 'edit' %}" class="btn-secondary btn btn-sm">Edit</a>
+                                <div class="col-md-4">
+                                    <a href="{% url 'edit' %}" class="btn-secondary btn btn-sm"><i class="fas fa-user-edit"></i> Edit</a>
                                 </div>
                             </div>
                             <h6 class="card-title">{{ user.email }}</h6>
