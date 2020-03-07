@@ -18,7 +18,7 @@
                             class="nav-item mr-3"
                         {% endif %}
                 >
-                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li
                         {% if '/listings/search' in request.path %}
@@ -26,7 +26,7 @@
                         {% else %}
                             class="nav-item mr-3"
                         {% endif %}>
-                    <a class="nav-link" href="{% url 'search' %}">Search</a>
+                    <a class="nav-link" href="{% url 'search' %}"><i class="fas fa-search"></i> Search</a>
                 </li>
 
                 <li
@@ -35,17 +35,17 @@
                         {% else %}
                             class="nav-item mr-3"
                         {% endif %}>
-                    <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
-                </li>
-                <li
-                        {% if '/about' in request.path %}
-                            class="nav-item active mr-3"
-                        {% else %}
-                            class="nav-item mr-3"
-                        {% endif %}
-                >
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
-                </li>
+                    <a class="nav-link" href="{% url 'listings' %}"><i class="fas fa-list"></i> Featured Listings</a>
+{#                </li>#}
+{#                <li#}
+{#                        {% if '/about' in request.path %}#}
+{#                            class="nav-item active mr-3"#}
+{#                        {% else %}#}
+{#                            class="nav-item mr-3"#}
+{#                        {% endif %}#}
+{#                >#}
+{#                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-linkedin-in"></i> About</a>#}
+{#                </li>#}
             </ul>
 
             <ul class="navbar-nav ml-auto">
@@ -57,15 +57,17 @@
                                 class="nav-item mr-3"
                             {% endif %}>
                         <a class="nav-link" href="{% url 'dashboard' %}">
+                            <i class="fas fa-user"></i>
                             Dashboard</a>
                     </li>
                     {% if user.is_staff %}
                         <a class="nav-link" href="/admin">
+                            <i class="fas fa-user-shield"></i>
                             Admin</a>
                     {% endif %}
                     <li class="nav-item mr-3">
                         <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
-                            Logout</a>
+                            <i class="fas fa-power-off"></i> Logout</a>
                         <form action="{% url 'logout' %}" method='POST' id="logout">
                             {% csrf_token %}
                             <input type="hidden"/>
