@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'staylndb',
         'USER': 'postgres',
-        'PASSWORD': 'root',
+        'PASSWORD': '65261599Duck',
         'HOST': 'localhost'
     }
 }

@@ -1,0 +1,26 @@
+<!-- Realtor -->
+{% load humanize %}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            Joined Stayln on {{ realtor.hire_date }}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-9">
+                    <h5 class="card-title">{{ realtor.name }}</h5>
+                    <p class="card-text">{{ realtor.description }}</p>
+                    <p><i class="fas fa-phone"></i> &nbsp; {{ realtor.phone }}</p>
+                    <p><i class="fas fa-envelope"></i> &nbsp; {{ realtor.email }}</p>
+
+                    <a href="#">{{ realtor.name  }} Detail >></a>
+                </div>
+                <div class="col-md-3">
+                    <img class="profile" src="{{ realtor.photo.url }}" alt="realtor profile" width="300px">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+</div>
