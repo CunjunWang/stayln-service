@@ -31,6 +31,10 @@ img {
     padding: 2.5rem 3rem;
 }
 
+.listing-photo {
+    height: 100%;
+}
+
 .profile {
     width: 150px;
 }

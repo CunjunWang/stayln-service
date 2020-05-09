@@ -22,11 +22,11 @@ def realtor_list(request):
 
 def detail(request, realtor_id):
     realtor = get_object_or_404(Realtor, pk=realtor_id)
-    listing = Listing.objects.filter(realtor_id=realtor_id)
+    listings = Listing.objects.filter(realtor_id=realtor_id)
 
     context = {
         'realtor': realtor,
-        'listing': listing
+        'listings': listings
     }
 
     return render(request, 'realtors/detail.html', context)

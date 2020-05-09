@@ -67,24 +67,15 @@
                     <div id="realtor-listings">
                         <div class="row mb-5 fields">
                             <div class="col-md-12">
-                                <p class="text-secondary">{{ realtor.name }}'s House Listing</p>
+                                <p class="text-secondary">Selected Listing</p>
                             </div>
-                            <div class="col-md-6">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-secondary">
-                                        <i class="fas fa-phone"></i> Phone:
-                                        <span class="float-right">(+1) {{ realtor.phone }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item text-secondary">
-                                        <i class="fas fa-envelope"></i> Email:
-                                        <span class="float-right">{{ realtor.email }}</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            {% if listings %}
+                                {% for house in listings %}
+                                    {% include 'partials/_horizontalListingCard.html' %}
+                                {% endfor %}
+                            {% else %}
+                                Not servicing any house currently.
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -154,28 +145,4 @@
             </div>
         </div>
     </div>
-    <script>
-        var map;
-        var geocoder;
-
-        function initMap() {
-            geocoder = new google.maps.Geocoder();
-            geocoder.geocode({'address': "{{ listing.address }}"}, function (results, status) {
-                if (status === 'OK') {
-
-                    var map = new google.maps.Map(
-                        document.getElementById('map'), {zoom: 15, center: results[0].geometry.location});
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    {#alert('Geocode was not successful for the following reason: ' + status);#}
-                }
-            });
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6kHpm24MjUXHqCxpNk7oIPBW40-Sp0Nc&callback=initMap"
-            async
-            defer></script>
 {% endblock %}
