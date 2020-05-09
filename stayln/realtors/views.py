@@ -1,12 +1,13 @@
 # Create your views here.
 
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 
 from .models import Realtor
+from listings.models import Listing
 
 
-def listing(request):
+def realtor_list(request):
     realtors = Realtor.objects.all()
     # print(len(realtors))
 
@@ -18,3 +19,14 @@ def listing(request):
 
     return render(request, 'realtors/list.html', context)
 
+
+def detail(request, realtor_id):
+    realtor = get_object_or_404(Realtor, pk=realtor_id)
+    listing = Listing.objects.filter(realtor_id=realtor_id)
+
+    context = {
+        'realtor': realtor,
+        'listing': listing
+    }
+
+    return render(request, 'realtors/detail.html', context)

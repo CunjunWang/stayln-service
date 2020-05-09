@@ -5,5 +5,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('list', views.listing, name='list'),
+    path('list', views.realtor_list, name='list'),
+    path('<int:realtor_id>', views.detail, name='detail')
 ]
