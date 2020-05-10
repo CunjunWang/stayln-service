@@ -9,6 +9,7 @@ from django.db import models
 class Ratings(models.Model):
     score = models.IntegerField()
     user_id = models.IntegerField()
+    user_name = models.CharField(null=True, max_length=50)
     realtor_id = models.IntegerField(null=True)
     listing_id = models.IntegerField(null=True)
     content = models.CharField(max_length=200)

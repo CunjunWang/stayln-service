@@ -1,8 +1,10 @@
 # Create your views here.
 
+from django.db.models import Avg
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
+from ratings.models import Ratings
 from .models import Realtor
 from listings.models import Listing
 
@@ -23,12 +25,25 @@ def realtor_list(request):
 def detail(request, realtor_id):
     realtor = get_object_or_404(Realtor, pk=realtor_id)
     listings = Listing.objects.filter(realtor_id=realtor_id)
-    ratings = []
+    ratings = Ratings.objects.filter(
+        realtor_id=realtor_id, type=1, is_published=True
+    ).order_by('submit_date')
+    avg = Ratings.objects.filter(realtor_id=realtor_id, type=1, is_published=True).aggregate(Avg('score'))
+
+    if avg['score__avg'] is None:
+        avg = '-'
+    else:
+        avg = avg['score__avg']
+
+    print(request.user.is_superuser)
 
     context = {
         'realtor': realtor,
         'listings': listings,
-        'ratings': ratings
+        'ratings': ratings,
+        'total': len(ratings),
+        'avg': avg,
+        'cur_user': request.user
     }
 
     return render(request, 'realtors/detail.html', context)

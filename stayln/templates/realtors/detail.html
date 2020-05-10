@@ -67,7 +67,7 @@
                     <div id="realtor-listings">
                         <div class="row mb-5 fields">
                             <div class="col-md-12">
-                                <p class="text-secondary">Selected Listing</p>
+                                <h4 class="text-primary">Selected Listing</h4>
                             </div>
                             {% if listings %}
                                 {% for house in listings %}
@@ -81,16 +81,16 @@
                     <div id="realtor-ratings">
                         <div class="row mb-5 fields">
                             <div class="col-md-12">
-                                <p class="text-secondary">Customer Ratings to {{ realtor.name }}
-                                    {% if user.is_authenticated  %}
+                                <h4 class="text-primary">Customer Ratings to {{ realtor.name }}
+                                    {% if user.is_authenticated and not user.is_superuser and not user.is_staff  %}
                                         <button class="btn btn-secondary" style="float: right;" data-toggle="modal" data-target="#ratingModal">
                                             Post Rating
                                         </button>
                                     {% endif %}
-                                </p>
+                                </h4>
                             </div>
                             <div class="col-md-12">
-                                <p class="text-secondary">Average rating: xxx / 5</p>
+                                <p class="text-secondary">Total {{ total }} ratings. Average rating: {{ avg }} / 5</p>
                             </div>
                             {% if ratings %}
                                 {% for rating in ratings %}
@@ -135,7 +135,7 @@
                 <div class="modal-body">
                     <form action="{% url 'contact' %}" method="POST">
                         {% csrf_token %}
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated  %}
                             <input type="hidden" name="user_id" value="{{ user.id }}"/>
                         {% else %}
                             <input type="hidden" name="user_id" value="0"/>
@@ -177,7 +177,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="inquiryModalLabel">Add new rating to {{ realtor.name }}</h5>
+                    <h5 class="modal-title" id="ratingModalLabel">Add new rating to {{ realtor.name }}</h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>&times;</span>
                     </button>
@@ -186,6 +186,7 @@
                     <form action="{% url 'add' %}" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="user_id" value="{{ user.id }}"/>
+                        <input type="hidden" name="user_name" value="{{ user.username }}"/>
                         <input type="hidden" name="realtor_id" value="{{ realtor.id }}"/>
 
                         <div class="form-group">
