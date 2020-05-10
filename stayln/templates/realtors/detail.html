@@ -67,7 +67,7 @@
                     <div id="realtor-listings">
                         <div class="row mb-5 fields">
                             <div class="col-md-12">
-                                <p class="text-secondary">Selected Listing</p>
+                                <h4 class="text-primary">Selected Listing</h4>
                             </div>
                             {% if listings %}
                                 {% for house in listings %}
@@ -78,19 +78,45 @@
                             {% endif %}
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <img class="card-img-top" src="{{ realtor.photo.url }}" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">Property Realtor</h5>
-                            <h6 class="text-secondary">{{ listing.realtor }}</h6>
+                    <div id="realtor-ratings">
+                        <div class="row mb-5 fields">
+                            <div class="col-md-12">
+                                <h4 class="text-primary">Customer Ratings to {{ realtor.name }}
+                                    {% if user.is_authenticated  %}
+                                        <button class="btn btn-secondary" style="float: right;" data-toggle="modal" data-target="#ratingModal">
+                                            Post Rating
+                                        </button>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="text-secondary">Total {{ total }} ratings. Average rating: {{ avg }} / 5</p>
+                            </div>
+                            {% if ratings %}
+                                {% for rating in ratings %}
+                                    {% include 'partials/_ratingCard.html' %}
+                                {% endfor %}
+                            {% else %}
+                                Not Rating for this realtor now 🙃.
+                            {% endif %}
                         </div>
                     </div>
-                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
-                        Inquiry
-                    </button>
-                    <hr>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div style="position: sticky; top: 80px;">
+                        <div class="card mb-3">
+                            <img class="card-img-top" src="{{ realtor.photo.url }}" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">Property Realtor</h5>
+                                <h6 class="text-secondary">{{ listing.realtor }}</h6>
+                            </div>
+                        </div>
+                        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">
+                            Make An Inquiry
+                        </button>
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
@@ -140,6 +166,41 @@
                         </div>
                         <hr>
                         <input type="submit" value="Send" class="btn btn-block btn-secondary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div class="modal fade" id="ratingModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inquiryModalLabel">Add new rating to {{ realtor.name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'add' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}"/>
+                        <input type="hidden" name="realtor_id" value="{{ realtor.id }}"/>
+
+                        <div class="form-group">
+                            <label for="score" class="col-form-label">Score:</label>
+                            <input type="text" name="score" class="form-control" placeholder="Enter an integer in 1 ~ 5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment" class="col-form-label">Comment:</label>
+                            <textarea name="comment" class="form-control" rows="10" placeholder="Leave your comment here to help him do better 😀!"></textarea>
+                        </div>
+
+                        <hr>
+
+                        <input type="submit" value="Submit" class="btn btn-block btn-secondary">
                     </form>
                 </div>
             </div>

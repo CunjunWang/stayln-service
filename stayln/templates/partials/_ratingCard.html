@@ -1,0 +1,25 @@
+<!-- Listing 1 -->
+{% load humanize %}
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <p class="text-secondary">
+                    Posted by {{ rating.user_name }} on {{ rating.submit_date }}
+                </p>
+            </div>
+            <hr>
+            <div >
+                <p class="text-secondary">Score: {{ rating.score }} / 5</p>
+            </div>
+            <div>
+                <p class="text-primary">
+                    {{ rating.content }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <br/>
+</div>
+
