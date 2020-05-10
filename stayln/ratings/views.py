@@ -11,25 +11,53 @@ from ratings.models import Ratings
 
 def add_rating(request):
     if request.method == 'POST':
-        score = request.POST['score']
+        score = int(request.POST['score'])
         comment = request.POST['comment']
         user_id = request.POST['user_id']
-        realtor_id = request.POST['realtor_id']
+        user_name = request.POST['user_name']
+
+        try:
+            realtor_id = request.POST['realtor_id']
+            path = 'realtors'
+            rating_type = 1
+            rating_id = realtor_id
+        except:
+            listing_id = request.POST['listing_id']
+            path = 'listings'
+            rating_type = 2
+            rating_id = listing_id
+
+        if (not isinstance(score, int)) or (score < 1 or score > 5):
+            messages.error(
+                request, 'You entered an invalid score!')
+            return redirect('/' + path + '/' + rating_id)
 
         if request.user.is_authenticated:
             user_id = request.user.id
-            has_rating = Ratings.objects.all().filter(
-                user_id=user_id, realtor_id=realtor_id, type=1, is_published=True)
-            if has_rating:
-                messages.error(
-                    request, 'You have already rated this realtor!')
-                return redirect('/realtors/' + realtor_id)
+            if rating_type == 1:
+                has_rating = Ratings.objects.all().filter(
+                    user_id=user_id, realtor_id=rating_id, type=rating_type, is_published=True)
+                if has_rating:
+                    messages.error(
+                        request, 'You have already rated this realtor!')
+                    return redirect('/' + path + '/' + rating_id)
+            else:
+                has_rating = Ratings.objects.all().filter(
+                    user_id=user_id, listing_id=rating_id, type=rating_type, is_published=True)
+                if has_rating:
+                    messages.error(
+                        request, 'You have already rated this house!')
+                    return redirect('/' + path + '/' + rating_id)
         else:
             messages.error(request, 'Please login')
             return redirect('login')
 
-        rating = Ratings(score=score, user_id=user_id, realtor_id=realtor_id,
-                         content=comment, type=1, is_published=True)
-        rating.save()
+        if rating_type == 1:
+            rating = Ratings(score=score, user_id=user_id, user_name=user_name, realtor_id=rating_id,
+                             content=comment, type=rating_type, is_published=True)
+        else:
+            rating = Ratings(score=score, user_id=user_id, user_name=user_name, listing_id=rating_id,
+                             content=comment, type=rating_type, is_published=True)
 
-        return redirect('/realtors/' + realtor_id)
+        rating.save()
+        return redirect('/' + path + '/' + rating_id)

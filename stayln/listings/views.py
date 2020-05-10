@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
+from django.db.models import Avg
 from django.shortcuts import render, get_object_or_404
 from listings.choices import price_choices, bedroom_choices, state_choices, bathroom_choices
+from ratings.models import Ratings
 
 from .models import Listing
 
@@ -18,7 +20,26 @@ def index(req):
 
 def listing(req, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
-    return render(req, 'listings/listing.html', {'listing': listing})
+
+    ratings = Ratings.objects.filter(
+        listing_id=listing.id, type=2, is_published=True
+    ).order_by('submit_date')
+
+    avg = Ratings.objects.filter(listing_id=listing.id, type=2, is_published=True).aggregate(Avg('score'))
+
+    if avg['score__avg'] is None:
+        avg = '-'
+    else:
+        avg = avg['score__avg']
+
+    context = {
+        'listing': listing,
+        'ratings': ratings,
+        'avg': avg,
+        'total': len(ratings)
+    }
+
+    return render(req, 'listings/listing.html', context)
 
 
 def search(request):
@@ -46,7 +67,7 @@ def search(request):
     if 'bedrooms' in request.GET:
         bedrooms = request.GET['bedrooms']
         if bedrooms:
-            queryset_list = queryset_list.filter(bedrooms__iexact=bedrooms)# Bedrooms
+            queryset_list = queryset_list.filter(bedrooms__iexact=bedrooms)  # Bedrooms
 
     if 'bathrooms' in request.GET:
         bathrooms = request.GET['bathrooms']

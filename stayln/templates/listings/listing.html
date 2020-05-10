@@ -149,12 +149,24 @@
                     <div id="listing-ratings">
                         <div class="row mb-5 fields">
                             <div class="col-md-12">
-                                <p class="text-primary">Customer ratings for {{ listing.title }} &nbsp;
+                                <h4 class="text-primary">Customer ratings for {{ listing.title }} &nbsp;
                                     {% if user.is_authenticated %}
-                                        <a href="#" class="btn btn-secondary" style="float: right;">Post Rating</a>
+                                        <button class="btn btn-secondary" style="float: right;" data-toggle="modal" data-target="#ratingModal">
+                                            Post Rating
+                                        </button>
                                     {% endif %}
-                                </p>
+                                </h4>
                             </div>
+                            <div class="col-md-12">
+                                <p class="text-secondary">Total {{ total }} ratings. Average rating: {{ avg }} / 5</p>
+                            </div>
+                            {% if ratings %}
+                                {% for rating in ratings %}
+                                    {% include 'partials/_ratingCard.html' %}
+                                {% endfor %}
+                            {% else %}
+                                Not Rating for this house now 🙃.
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -228,6 +240,43 @@
             </div>
         </div>
     </div>
+
+    <!-- Rating Modal -->
+    <div class="modal fade" id="ratingModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ratingModalLabel">Add new rating to {{ listing.title }}</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'add' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ user.id }}"/>
+                        <input type="hidden" name="user_name" value="{{ user.username }}"/>
+                        <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+
+                        <div class="form-group">
+                            <label for="score" class="col-form-label">Score:</label>
+                            <input type="text" name="score" class="form-control" placeholder="Enter an integer in 1 ~ 5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment" class="col-form-label">Comment:</label>
+                            <textarea name="comment" class="form-control" rows="10" placeholder="Leave your comment here to share more information to other customers 😀!"></textarea>
+                        </div>
+
+                        <hr>
+
+                        <input type="submit" value="Submit" class="btn btn-block btn-secondary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         var map;
         var geocoder;

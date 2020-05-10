@@ -35,12 +35,15 @@ def detail(request, realtor_id):
     else:
         avg = avg['score__avg']
 
+    print(request.user.is_superuser)
+
     context = {
         'realtor': realtor,
         'listings': listings,
         'ratings': ratings,
         'total': len(ratings),
-        'avg': avg
+        'avg': avg,
+        'cur_user': request.user
     }
 
     return render(request, 'realtors/detail.html', context)
