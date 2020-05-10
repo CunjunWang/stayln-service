@@ -43,6 +43,12 @@ img {
     padding: 2rem !important;
 }
 
+.sticky {
+  position: fixed;
+  top: 60px;
+  width: 100%
+}
+
 #showcase {
     background: url(../img/showcase.jpg) no-repeat top center fixed/cover;
     position: relative;

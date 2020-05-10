@@ -146,23 +146,34 @@
                     </div>
 
                     <!-- Rating -->
-
-
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">Property Realtor</h5>
-                            <a href="/realtors/{{ listing.realtor.id }}" class="text-secondary">{{ listing.realtor }} >></a>
+                    <div id="listing-ratings">
+                        <div class="row mb-5 fields">
+                            <div class="col-md-12">
+                                <p class="text-primary">Customer ratings for {{ listing.title }} &nbsp;
+                                    {% if user.is_authenticated %}
+                                        <a href="#" class="btn btn-secondary" style="float: right;">Post Rating</a>
+                                    {% endif %}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
-                        Inquiry
-                    </button>
-                    <hr>
-                    <h4 class="text-primary">Address</h4>
-                    <div id="map" style="height: 45%"></div>
+                </div>
+
+                <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">Property Realtor</h5>
+                                <a href="/realtors/{{ listing.realtor.id }}" class="text-secondary">{{ listing.realtor }} >></a>
+                            </div>
+                        </div>
+                        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">
+                            Make An Inquiry
+                        </button>
+                        <hr>
+                        <h4 class="text-primary">Address</h4>
+                        <div id="map" style="height: 45%"></div>
+<!--                        <div id="map"></div>-->
                 </div>
             </div>
         </div>
