@@ -1,3 +1,21 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 75%;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    color: #6D5D4B;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
 .btn-secondary {
     color: #fff !important;
 }
@@ -19,6 +37,78 @@ img {
     margin-right: 0.4rem;
 }
 
+.btn {
+    background-color: #c69963;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.btn:hover {
+    background-color: #B28451;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.home {
+    background-color: #f9f7f6;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 3.5rem;
+}
+
+.home__img {
+    width: 100%;
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+    z-index: 1;
+}
+
+.home__name {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    align-self: end;
+    justify-self: center;
+    transform: translateY(50%);
+    z-index: 3;
+    width: 80%;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1.25rem;
+    background-color: #101d2c;
+    color: white;
+    font-weight: 400;
+}
+
+.home__location, .home__rooms {
+    margin-top: 2.5rem;
+}
+
+.home__location, .home__rooms, .home__area, .home__price {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.home__p {
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+.home__btn {
+    grid-column: 1 / -1;
+}
+
 #register, #login {
     background: url(../img/showcase.jpg) no-repeat top center fixed;
 }
@@ -26,9 +116,9 @@ img {
 #showcase {
     background: url(../img/showcase.jpg) no-repeat top center fixed;
     position: relative;
-    min-height: 550px;
+    min-height: 300px;
     color: #fff;
-    padding-top: 2rem;
+    padding-top: 5rem;
 }
 
 #showcase .home-search {
